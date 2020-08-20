@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--
+    Funciona correctamente dentro del servidor, en la carpeta public del server. Así reconoce la vinculación con el servidor
+    Autor: José Luis Nicolás Hernández
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/angular-1.0.0.min.js"></script>
+    <script src="js/main.js"></script>
+    <title>Pack&Pack</title>
+</head>
+<body>
+    <div class="containerDiv" ng-app="myapp" style="margin: 5px 5px 5px 5px;" ng-controller="mainview">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="logo" style="align-items: center; display: flex; justify-content: center; margin-top: 40px;">
+                        <div id="img">
+                            <img src="./img/packnpacklogo.png" style="height: 200px;">
+                        </div>
+                        <div id="titulo" style="position: absolute; margin-top: 250px;">
+                            <h1>Pack & Pack</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="dataForm" style="align-items: center; display: flex; justify-content: center; margin-top: 70px;">
+                        <form name="add">
+                            <fieldset>
+                                <legend>Add to Database</legend>
+                                <label for="personName">Name</label><br>
+                                <input type="text" name="personName" id="nameData" ng-model="userData.name" required><br>
+
+                                <label for="personEmail">Email</label><br>
+                                <input type="text" name="personEmail" id="emailData" ng-model="userData.email"><br>
+
+                                <label for="phoneNum">Phone number</label><br>
+                                <input type="number" name="phoneNum" id="phoneData" ng-model="userData.phoneNum"><br>
+
+                                <label for="personPass">Password</label><br>
+                                <input type="password" name="personPass" id="passwordData" ng-model="userData.password" required><br>
+
+                                <label for="personAge">Age</label><br>
+                                <input type="number" name="personAge" id="ageData" ng-model="userData.age" required><br>
+
+                                <label for="personGender">Gender</label><br>
+                                <input name="personGender" type="radio" required value="male" ng-model="userData.gender"/>Male
+                                <input name="personGender" type="radio" required value="female" ng-model="userData.gender"/>Female
+                                <br>
+                                <label for="personHobby">Hobby</label><br>
+                                <input type="text" name="personHobby" id="hobbyData" ng-model="userData.hobby" required><br>
+
+                                <label for="personregistrationDate">Registration date</label><br>
+                                <input type="text" name="personregistrationDate" id="registrationDateData" ng-model="userData.registrationDate" required><br>
+
+                                <center><input type="submit" value="Submit" ng-click="addData()" style="margin-top: 16px;"></center>
+                                
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="table" style="align-items: center; display: flex; justify-content: center; margin-top: 70px;">
+                        <table>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Hobby</th>
+                                <th>registrationDate</th>
+                            </tr>
+                            <tr ng-repeat="info in bdData">
+                                <td>{{info.name}}</td>
+                                <td>{{info.email}}</td>
+                                <td>{{info.phoneNum}}</td>
+                                <td>{{info.age}}</td>
+                                <td>{{info.gender}}</td>
+                                <td>{{info.hobby}}</td>
+                                <td>{{info.registrationDate}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="searchbars" style="align-items: center; display: flex; justify-content: center; margin-top: 10px;">
+                        <label for="name">Find by name: </label>
+                        <input type="text" name="name" id="findName" ng-model="byName">
+                        <label for="hobby">Find by hobby: </label>
+                        <input type="text" name="hobby" id="findhobby" ng-model="byHobby"><br>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="findby" style="align-items: center; display: flex; justify-content: center; margin-top: 10px;">
+                        <button ng-click="FindBy()">Find by</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="deleteData" style="align-items: center; display: flex; justify-content: center; margin-top: 10px;">
+                        <label for="delete">Delete by name: </label>
+                        <input type="text" name="delete" id="findDelete" ng-model="dataToDelete"><br>
+                        <button ng-click="DeleteData()">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+</body>
+<html>
