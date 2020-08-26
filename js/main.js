@@ -14,17 +14,42 @@ app.controller("mainview",['$scope', '$http', function($scope, $http) {
   $scope.byHobby = "";
   $scope.dataToDelete = "";
 
-  $http.get("/api/users").then(function (response){
+  /*var myHeaders = new Headers();
+  var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGVjayI6dHJ1ZSwiaWF0IjoxNTk4MzM0MjQwLCJleHAiOjE1OTgzMzU2ODB9.Yw6eFib2RSFJIBGokcYu1aKddNZVTNJyFyTa4dFQTeg';
+  myHeaders.append('access-token', token);
+  fetch('/api/users', {
+    method:'GET',
+    headers: myHeaders
+  })
+  .then(res => res.json())
+  .then(data => $scope.bdData = data.usrs);
+  
+  fetch('/api/newuser', {
+    method:'POST',
+    headers: myHeaders
+  })
+  .then(res => res)
+  .then(data => console.log(data));*/
+
+  var config = {headers:  {
+    'access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGVjayI6dHJ1ZSwiaWF0IjoxNTk4NDIzNjI1LCJleHAiOjE1OTg0MjUwNjV9.XsdCjnsA-1m-uxN62gYRsMD4QInFEmUVviu0T6hhIBo',
+    'Accept': 'application/json;odata=verbose',
+    "X-Testing" : "testing"
+}
+};
+
+  $http.get("/api/users", config).then(function (response){
+    console.log(response.data);
     $scope.bdData = response.data.usrs;
-    //console.log($scope.bdData);
   });
+  //document.getElementById('findbtn').click();
 
   $scope.addData = function()
   {
-    $http.post("/api/newuser", $scope.userData).then(function (response) {
+    $http.post("/api/newuser", $scope.userData, config).then(function (response) {
       //console.log(response.data);
     });
-    $http.get("/api/users").then(function (response){
+    $http.get("/api/users", config).then(function (response){
       $scope.bdData = response.data.usrs;
       //console.log($scope.bdData);
     });
@@ -49,16 +74,16 @@ app.controller("mainview",['$scope', '$http', function($scope, $http) {
     {
       tmp = "/api/users?type=hobby&parameter="+$scope.byHobby+"&type2=name&parameter="+$scope.byName;
     }
-    $http.get(tmp).then(function (response){
+    $http.get(tmp, config).then(function (response){
       $scope.bdData = response.data.usrs;
     });
   }
 
   $scope.DeleteData = function()
   {
-    $http.delete('/api/deleteuser/'+$scope.dataToDelete).then(function (response){
+    $http.delete('/api/deleteuser/'+$scope.dataToDelete, config).then(function (response){
     });
-    $http.get("/api/users").then(function (response){
+    $http.get("/api/users", config).then(function (response){
       $scope.bdData = response.data.usrs;
     });
   }
