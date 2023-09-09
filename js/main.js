@@ -6,6 +6,7 @@ app.controller("mainview",['$scope', '$http', function($scope, $http) {
   //enviando el token de autenticación de parte de frontend. Sin embargo, si retiro la parte de la autenticación de cada request de backend,
   //el programa funciona correctamente con cada una de las acciones que me pidieron programar y está practicamente todo hecho. Solo me hizo falta
   //investigar un poco más, y estoy completamente seguro que se lograría sin problemas.
+	//09-09-09 NO MMS NO SABÍA EN ESE ENTONCES QUE EXISTÍA ANGULAR Y ANGULARJS, QUE ERAN DIFERENTES Y ESO ME HIZO PERDER MUCHO TIEMPO, PERDERME Y NO LOGRAR EL OBJETIVO...
   // Autor: José Luis Nicolás Hernández
 
   $scope.userData = {name:"", email:"", phoneNum: null, password: "", age: null, gender: "", hobby: "", registrationDate: null};
